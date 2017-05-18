@@ -3,7 +3,7 @@
 echo '''
 Copyright (C) 2016 Sminq India Solutions Pvt Ltd.
 Created on 2016-11-23
-Updated on 2017-05-17
+Updated on 2017-05-18
 
  ____    __  __   ___   _   _    ___
 / ___|  |  \/  | |_ _| | \ | |  / _ \
@@ -17,7 +17,7 @@ ___) |  | |  | |  | |  | |\  | | |_| |
 
 echo "================================="
 echo "Sminq User App v2.2.2 ..."
-echo "Running Test Suite v1.1 ..."
+echo "Running Test Suite v1.2 ..."
 echo "================================="
 
 d="$(date +'%d-%m-%Y')"
@@ -42,7 +42,7 @@ do
 
     #Execute file
     python $fname
-    # total_count=$((total_count + 1))
+    total_count=$((total_count + 1))
 
   done
 done
@@ -52,5 +52,5 @@ end=`date +%s`
 total_time=$((end-start))
 
 echo "================================="
-echo "Time taken for sminq test suite: $total_time sec."
+echo "Time taken for $total_count tests: $total_time sec."
 echo "================================="
