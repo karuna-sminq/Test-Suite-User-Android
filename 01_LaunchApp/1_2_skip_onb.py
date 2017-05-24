@@ -18,20 +18,24 @@ class LaunchApp(unittest.TestCase):
         self.driver = webdriver.Remote('http://0.0.0.0:4723/wd/hub', desired_caps)
         self.driver.implicitly_wait(60)
 
-    def test_launch(self):
+    def test_skip(self):
 
         if self.driver.find_element_by_id("com.sminq.userbug:id/navigation_container"):
-            print "\nPassed! Onboarding Screen found!"
+            print "\nOnboarding Screen found!"
+
+        self.driver.find_element_by_id("com.sminq.userbug:id/tv_skip").click()
+
+        self.driver.find_element_by_id("com.android.packageinstaller:id/permission_allow_button").click()
+        self.driver.find_element_by_id("com.android.packageinstaller:id/permission_allow_button").click()
+        self.driver.find_element_by_id("com.android.packageinstaller:id/permission_allow_button").click()
+
+        title = self.driver.find_element_by_xpath("//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.view.ViewGroup[1]/android.widget.LinearLayout[1]/android.view.ViewGroup[1]/android.widget.TextView[1]").get_attribute('text')
+
+        if title == "Log In":
+            print "\nPassed! Onboarding Skipped!"
         else:
-            print "\nFailed! Onboarding not found"
+            print "\nFailed! Onboarding still visible!"
 
-        self.driver.find_element_by_id("com.sminq.userbug:id/tv_next").click()
-        self.driver.find_element_by_id("com.sminq.userbug:id/tv_next").click()
-        self.driver.find_element_by_id("com.sminq.userbug:id/tv_next").click()
-
-        self.driver.find_element_by_id("com.android.packageinstaller:id/permission_allow_button").click()
-        self.driver.find_element_by_id("com.android.packageinstaller:id/permission_allow_button").click()
-        self.driver.find_element_by_id("com.android.packageinstaller:id/permission_allow_button").click()
 
     # def tearDown(self):
     # 	self.driver.quit()

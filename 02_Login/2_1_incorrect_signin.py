@@ -9,6 +9,7 @@ import time
 
 class Login(unittest.TestCase):
     def setUp(self):
+        title = ""
         desired_caps = {}
         desired_caps['appium-version'] = '1.0'
         desired_caps['platformName'] = 'Android'
@@ -20,22 +21,20 @@ class Login(unittest.TestCase):
         self.driver = webdriver.Remote('http://0.0.0.0:4723/wd/hub', desired_caps)
         self.driver.implicitly_wait(60)
 
-    def test_correct_signin(self):
-        self.driver.find_element_by_id("com.sminq.userbug:id/edit_text_mobile_number").send_keys('7000000005')
+    def test_incorrect_signin(self):
+        self.driver.find_element_by_id("com.sminq.userbug:id/edit_text_mobile_number").send_keys('7242234200')
         self.driver.find_element_by_id("com.sminq.userbug:id/button_login").click()
-        self.driver.find_element_by_id("com.sminq.userbug:id/btn_enter_otp_manually").click()
-        self.driver.find_element_by_id("com.sminq.userbug:id/edit_text_otp").send_keys(989898)
-        self.driver.find_element_by_id("com.sminq.userbug:id/button_verify_account").click()
+        title = self.driver.find_element_by_xpath("//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.view.ViewGroup[1]/android.widget.LinearLayout[1]/android.view.ViewGroup[1]/android.widget.TextView[1]").get_attribute('text')
 
-        if self.driver.find_element_by_id("com.sminq.userbug:id/tv_selected_city"):
-            print "\nPassed! Sign in successful"
-            print self.driver.find_element_by_id("com.sminq.userbug:id/tv_selected_city").get_attribute('text')
+        print "\n"+title
+
+        if title == "Sign Up":
+            print "\nPassed! Incorrect sign in. User is not registered."
         else:
-            print "\nFailed! Sign in unsuccessful"
+            print "\nFailed! User signin successful"
 
-
-    def tearDown(self):
-    	self.driver.quit()
+    # def tearDown(self):
+    # 	self.driver.quit()
 
 if __name__ == "__main__":
     suite = unittest.TestLoader().loadTestsFromTestCase(Login)
