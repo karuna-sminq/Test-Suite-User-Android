@@ -20,7 +20,7 @@ class Login(unittest.TestCase):
         self.driver = webdriver.Remote('http://0.0.0.0:4723/wd/hub', desired_caps)
         self.driver.implicitly_wait(60)
 
-    def test_correct_signin(self):
+    def test_correct_signin_otp(self):
         self.driver.find_element_by_id("com.sminq.userbug:id/edit_text_mobile_number").send_keys('7000000005')
         self.driver.find_element_by_id("com.sminq.userbug:id/button_login").click()
         self.driver.find_element_by_id("com.sminq.userbug:id/btn_enter_otp_manually").click()

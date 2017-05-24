@@ -24,6 +24,7 @@ class Login(unittest.TestCase):
     def test_incorrect_signin(self):
         self.driver.find_element_by_id("com.sminq.userbug:id/edit_text_mobile_number").send_keys('7242234200')
         self.driver.find_element_by_id("com.sminq.userbug:id/button_login").click()
+
         title = self.driver.find_element_by_xpath("//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.view.ViewGroup[1]/android.widget.LinearLayout[1]/android.view.ViewGroup[1]/android.widget.TextView[1]").get_attribute('text')
 
         print "\n"+title
