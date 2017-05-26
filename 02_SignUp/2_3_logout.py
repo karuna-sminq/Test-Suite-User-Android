@@ -7,7 +7,7 @@ from time import sleep
 from appium import webdriver
 import time
 
-class Login(unittest.TestCase):
+class SignUp(unittest.TestCase):
     def setUp(self):
         desired_caps = {}
         desired_caps['appium-version'] = '1.0'
@@ -20,7 +20,7 @@ class Login(unittest.TestCase):
         self.driver = webdriver.Remote('http://0.0.0.0:4723/wd/hub', desired_caps)
         self.driver.implicitly_wait(60)
 
-    def test_forgot_pin(self):
+    def test_logout(self):
 
         #Logout
         self.driver.find_element_by_xpath("//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.view.ViewGroup[1]/android.widget.RelativeLayout[1]/android.widget.HorizontalScrollView[1]/android.widget.LinearLayout[1]/android.support.v7.app.ActionBar.Tab[4]/android.widget.RelativeLayout[1]").click()
@@ -28,33 +28,19 @@ class Login(unittest.TestCase):
         self.driver.find_element_by_id("com.sminq.userbug:id/btn_logout").click()
         self.driver.find_element_by_id("android:id/button1").click()
 
-        self.driver.find_element_by_id("com.sminq.userbug:id/edit_text_mobile_number").send_keys('1234567890')
-        self.driver.find_element_by_id("com.sminq.userbug:id/button_login").click()
+        title = self.driver.find_element_by_xpath("//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.view.ViewGroup[1]/android.widget.LinearLayout[1]/android.view.ViewGroup[1]/android.widget.TextView[1]").get_attribute('text')
 
-        #Forgot PIN
-        self.driver.find_element_by_id("com.sminq.userbug:id/text_view_forgot_pin").click()
+        print "\n"+title
 
-        fp_text = self.driver.find_element_by_id("android:id/message").get_attribute('text')
-
-        searchObj = re.search(r"PIN through SMS", fp_text, re.M|re.I)
-        if searchObj:
-            print "PIN Sent to registered number"
-            self.driver.find_element_by_id("android:id/button1").click()
+        if title == "Log In":
+            print "\nPassed! Logout successful."
         else:
-            print "User does not have PIN set"
-
-        self.driver.find_element_by_id("com.sminq.userbug:id/edit_text_pin").send_keys(1111)
-
-        if self.driver.find_element_by_id("com.sminq.userbug:id/tv_selected_city"):
-            print "\nPassed! Sign in successful"
-            print self.driver.find_element_by_id("com.sminq.userbug:id/tv_selected_city").get_attribute('text')
-        else:
-            print "\nFailed! Sign in unsuccessful"
+            print "\nFailed! User still logged in."
 
 
     def tearDown(self):
     	self.driver.quit()
 
 if __name__ == "__main__":
-    suite = unittest.TestLoader().loadTestsFromTestCase(Login)
+    suite = unittest.TestLoader().loadTestsFromTestCase(SignUp)
     unittest.TextTestRunner(verbosity=2).run(suite)
