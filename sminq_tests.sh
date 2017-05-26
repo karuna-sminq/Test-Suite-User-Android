@@ -3,7 +3,7 @@
 echo '''
 Copyright (C) 2016 Sminq India Solutions Pvt Ltd.
 Created on 2016-11-23
-Updated on 2017-05-24
+Updated on 2017-05-26
 
  ____    __  __   ___   _   _    ___
 / ___|  |  \/  | |_ _| | \ | |  / _ \
@@ -17,7 +17,7 @@ ___) |  | |  | |  | |  | |\  | | |_| |
 
 echo "================================="
 echo "Sminq User App v2.2.2 ..."
-echo "Running Test Suite v1.4 ..."
+echo "Running Test Suite v1.5 ..."
 echo "================================="
 
 d="$(date +'%d-%m-%Y')"

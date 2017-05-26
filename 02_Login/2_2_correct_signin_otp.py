@@ -34,8 +34,8 @@ class Login(unittest.TestCase):
             print "\nFailed! Sign in unsuccessful"
 
 
-    def tearDown(self):
-    	self.driver.quit()
+    # def tearDown(self):
+    # 	self.driver.quit()
 
 if __name__ == "__main__":
     suite = unittest.TestLoader().loadTestsFromTestCase(Login)
